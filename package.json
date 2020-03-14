@@ -1,0 +1,49 @@
+{
+  "name": "aframe",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "@mohayonao/perlin-noise": "^0.2.0",
+    "@tensorflow-models/coco-ssd": "^2.0.0",
+    "@tensorflow/tfjs-converter": "~1.2.5",
+    "@tensorflow/tfjs-core": "~1.2.6",
+    "@tweenjs/tween.js": "^18.3.1",
+    "Particle": "^2.2.1",
+    "assemble": "^0.24.3",
+    "bezier-easing": "^2.1.0",
+    "colorsys": "^1.0.22",
+    "dat.gui": "^0.7.6",
+    "electron": "^6.0.11",
+    "glslEditor": "^0.0.22",
+    "glslGallery": "^0.0.9",
+    "glslify": "^7.0.0",
+    "grunt": "^1.0.4",
+    "js": "^0.1.0",
+    "js-event-bus": "^1.0.0",
+    "p5": "^0.9.0",
+    "parcel": "^1.12.4",
+    "rimraf": "^2.6.3",
+    "stats.js": "^0.17.0",
+    "styles": "^0.2.1",
+    "three": ">=0.114.0",
+    "three-css3drenderer": "^1.0.1",
+    "three-dat.gui": "^2.0.6",
+    "three-orbitcontrols": "^2.110.3",
+    "three-trackballcontrols": "^0.0.8",
+    "three.meshline": "^1.2.0",
+    "tween": "^0.9.0",
+    "tweenjs": "^1.0.2"
+  },
+  "scripts": {
+    "start": "parcel index.html",
+    "dev": "parcel index.html",
+    "dev:https": "parcel index.html --https",
+    "build": "parcel build index.html",
+    "clean:build": "rimraf .cache dist && parcel build index.html",
+    "clean": "rimraf .cache dist"
+  },
+  "devDependencies": {
+    "sass": "^1.22.4"
+  }
+}

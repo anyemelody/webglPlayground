@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>ParticlesPortrait</title>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"
+    />
+    <link rel="stylesheet" type="text/css" media="all" href="src/main.css" />
+    <style>
+      #drawing-canvas {
+        position: absolute;
+        /* background-color: #000000; */
+        top: 0px;
+        left: 0px;
+        z-index: 3000;
+        cursor: crosshair;
+        opacity: 0;
+      }
+      #snap {
+        margin: 0px 5px;
+        position: relative;
+        padding: 0.1rem 0.5rem;
+        background: white;
+      }
+      .buttons {
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+      video {
+        position: absolute;
+        top: -100%;
+        opacity: 0;
+      }
+    </style>
+  </head>
+
+  <body ondrop="dropHandler(event);" ondragover="dragOverHandler(event);">
+    <script type="x-shader/x-vertex" id="vertexshader">
+      attribute float size;
+      attribute vec3 customColor;
+      varying vec3 vColor;
+      void main() {
+      	vColor = customColor;
+      	vec4 mvPosition = modelViewMatrix * vec4( position, 1.0 );
+      	gl_PointSize = size * ( 300.0 / -mvPosition.z );
+      	gl_Position = projectionMatrix * mvPosition;
+      }
+    </script>
+
+    <script type="x-shader/x-fragment" id="fragmentshader">
+      uniform vec3 color;
+      uniform sampler2D pointTexture;
+
+      varying vec3 vColor;
+      void main() {
+      	gl_FragColor = vec4( color * vColor, 1.0 );
+      	gl_FragColor = gl_FragColor * texture2D( pointTexture, gl_PointCoord );
+          if ( gl_FragColor.a < ALPHATEST ) discard;
+      }
+    </script>
+    <video id="video" width="192" height="108"></video>
+    <!-- <button id="photo">photoMode</button>
+    <button id="selfie">webcamMode</button> -->
+    <div class="buttons">
+      <button id="live">Go Live</button>
+      <button id="snap">Take Photo</button>
+      <button id="blowAway">Blow Away</button>
+    </div>
+    <canvas id="drawing-canvas" width="200" height="200"></canvas>
+    <!-- <script src="src/particle_portrait_webcam.js"></script> -->
+    <script src="dist/particle_portrait_webcam.c1d2df20.js"></script>
+  </body>
+</html>

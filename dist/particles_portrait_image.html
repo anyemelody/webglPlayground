@@ -1,0 +1,21 @@
+<!DOCTYPE html><html><head><title>ParticlesPortrait</title><meta charset="utf-8"><meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"><link rel="stylesheet" type="text/css" media="all" href="/main.824cac8e.css"><style>#drawing-canvas{position:absolute;top:0;left:0;z-index:3000;cursor:crosshair}#snap{margin:10px 30px}#blowAway,#snap{position:relative;padding:.1rem .5rem}#blowAway{margin:10px 400px}body{background-image:linear-gradient(147deg,#000,#04619f 74%);background:#000}</style></head><body ondrop="dropHandler(event);" ondragover="dragOverHandler(event);"> <script type="x-shader/x-vertex" id="vertexshader">
+      attribute float size;
+      attribute vec3 customColor;
+      varying vec3 vColor;
+      void main() {
+      	vColor = customColor;
+      	vec4 mvPosition = modelViewMatrix * vec4( position, 1.0 );
+      	gl_PointSize = size * ( 300.0 / -mvPosition.z );
+      	gl_Position = projectionMatrix * mvPosition;
+      }
+    </script> <script type="x-shader/x-fragment" id="fragmentshader">
+      uniform vec3 color;
+      uniform sampler2D pointTexture;
+
+      varying vec3 vColor;
+      void main() {
+      	gl_FragColor = vec4( color * vColor, 1.0 );
+      	gl_FragColor = gl_FragColor * texture2D( pointTexture, gl_PointCoord );
+          if ( gl_FragColor.a < ALPHATEST ) discard;
+      }
+    </script>   <div> <canvas id="drawing-canvas" width="200" height="200"></canvas>  <button id="blowAway">Blow Away</button> </div> <script src="/particle_portrait_Image.85b890b6.js"></script>  </body></html>

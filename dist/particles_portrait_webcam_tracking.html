@@ -1,0 +1,21 @@
+<!DOCTYPE html><html><head><title>ParticlesPortrait</title><meta charset="utf-8"><meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"><link rel="stylesheet" type="text/css" media="all" href="/main.824cac8e.css"><style>#drawing-canvas{position:absolute;top:0;left:0;z-index:3000;cursor:crosshair;opacity:0}#snap{margin:0 5px;position:relative;padding:.1rem .5rem;background:#fff}.buttons{top:0;left:50%;transform:translateX(-50%)}.buttons,video{position:absolute}video{top:-100%;opacity:0}</style></head><body ondrop="dropHandler(event);" ondragover="dragOverHandler(event);"> <script type="x-shader/x-vertex" id="vertexshader">
+      attribute float size;
+      attribute vec3 customColor;
+      varying vec3 vColor;
+      void main() {
+      	vColor = customColor;
+      	vec4 mvPosition = modelViewMatrix * vec4( position, 1.0 );
+      	gl_PointSize = size * ( 300.0 / -mvPosition.z );
+      	gl_Position = projectionMatrix * mvPosition;
+      }
+    </script> <script type="x-shader/x-fragment" id="fragmentshader">
+      uniform vec3 color;
+      uniform sampler2D pointTexture;
+
+      varying vec3 vColor;
+      void main() {
+      	gl_FragColor = vec4( color * vColor, 1.0 );
+      	gl_FragColor = gl_FragColor * texture2D( pointTexture, gl_PointCoord );
+          if ( gl_FragColor.a < ALPHATEST ) discard;
+      }
+    </script> <video id="video" width="192" height="108"></video>  <div class="buttons"> <button disabled id="live">Go Live</button> <button disabled id="snap">Take Photo</button> <button disabled id="blowAway">Blow Away</button> </div> <canvas id="drawing-canvas" width="200" height="200"></canvas> <script src="/particle_portrait_webcam_tracking.ffdf4d2f.js"></script> </body></html>
