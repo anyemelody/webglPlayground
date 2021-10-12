@@ -14,7 +14,7 @@
     "bezier-easing": "^2.1.0",
     "colorsys": "^1.0.22",
     "dat.gui": "^0.7.6",
-    "electron": "^6.0.11",
+    "electron": "^11.5.0",
     "glslEditor": "^0.0.22",
     "glslGallery": "^0.0.9",
     "glslify": "^7.0.0",
