@@ -26,7 +26,7 @@
     "rimraf": "^2.6.3",
     "stats.js": "^0.17.0",
     "styles": "^0.2.1",
-    "three": ">=0.114.0",
+    "three": ">=0.137.0",
     "three-css3drenderer": "^1.0.1",
     "three-dat.gui": "^2.0.6",
     "three-orbitcontrols": "^2.110.3",
